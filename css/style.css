@@ -1,0 +1,134 @@
+* {
+	line-height:1.4em;
+}
+
+body {
+	background-color:#527AB4;
+	margin:0;
+	padding:0;
+	font-family:Lucida Grande, Verdana, Arial, Sans-serif;
+	font-size:11pt;
+}
+
+p {
+	margin:0;
+	padding:5px;
+}
+
+.card {
+	position:relative;
+	width:50%;
+	border:solid black 1px;
+	background-color:white;
+	text-align:left;
+	padding:25px;
+	margin-top:5%;
+	margin-bottom:10%;
+}
+
+.contact {
+	text-align:right;
+}
+
+h1, h2, h3 {
+	font-family:Georgia, Verdana, Arial, Sans-serif;
+	margin:20px 0 0 0;
+	padding:0;
+}
+
+h1 {
+	font-size:220%;
+	font-weight:bold;
+	margin:0px;
+	padding:0px;
+}
+
+h2, h3 {
+	color:#999;
+}
+
+
+h2 {
+	font-size:50%
+	font-weight:normal;
+}
+
+ul li {
+	list-style:none;
+	margin:5 0 0 0px;
+	padding:5 0 5 0px;
+	font-size:14px;
+}
+
+ul.sub li.sub {
+	margin:0 0 5 25px;
+	padding:0 0 5 0px;
+	font-size:14px;
+list-style-image: url(imgs/star9.gif);
+}
+
+
+ul.sub {
+	margin:0;
+	padding:0 5 0 0px;
+}
+
+
+ul {
+	margin:0 0 0 0px;
+}
+
+
+
+a {
+  color:black;
+	text-decoration:none;
+	border-bottom:solid blue 1px;
+}
+
+a:hover {
+color:blue;
+}
+
+.footerquote {
+	margin-top:50px;
+	text-align:center;
+	font-style:italic;
+	border-top:solid gray 1px;
+	font-size:75%;
+}
+.header {
+	padding-bottom:10px;
+	border-bottom:solid gray 1px;
+}
+.alert {
+	color:red;
+	font-weight:bold;
+}
+
+
+
+/*
+ * print styles
+ */
+@media print {
+  * { background: transparent !important; color: #444 !important; text-shadow: none; }
+  a, a:visited { color: #444 !important; text-decoration: underline; }
+  a:after { content: " (" attr(href) ")"; }
+  abbr:after { content: " (" attr(title) ")"; }
+  .ir a:after { content: ""; }  /* Don't show links for images */
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  img { page-break-inside: avoid; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3{ page-break-after: avoid; }
+}
+
+
+
+/* Grade-A Mobile Browsers */
+@media screen and (max-device-width: 480px) {
+  html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; }
+
+}
+
