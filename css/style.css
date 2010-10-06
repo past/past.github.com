@@ -106,7 +106,9 @@ color:blue;
 	font-weight:bold;
 }
 
-
+.nolink {
+    border: 0;
+}
 
 /*
  * print styles
