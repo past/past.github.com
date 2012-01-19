@@ -1,3 +1,7 @@
 function fib(n) {
-  return n > 1 ? fib(n - 1) + fib(n - 2) : 1;
+  if (n < 2)
+    return 1;
+  var i = fib(n - 1);
+  var j = fib(n - 2);
+  return i + j;
 }
