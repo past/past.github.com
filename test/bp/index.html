@@ -9,7 +9,7 @@
 <script type="text/javascript">
 function first() {
     var p = document.querySelector("p");
-    p.innerHTML += "<br>entered first()";
+    p.innerHTML += "<br><br>entered first()";
     var a = 10;
     var b = 20;
     var sum = eval("add(a, b);");
@@ -18,10 +18,10 @@ function first() {
     p.innerHTML += "<br>" + a + " + " + b + " = " + sum;
     p.innerHTML += "<br>" + a + " * " + b + " = " + result;
     p.innerHTML += "<br>Fibbonacci sequence (n=" + a + "):";
-    for (var i = 0; i < a; i++) {
+    for (var i = 0; i <= a; i++) {
       p.innerHTML += "<br>" + i + ": " + fib(i);
     }
-    p.innerHTML += "<br>exiting first()<br>";
+    p.innerHTML += "<br>exiting first()";
 }
 var button = document.querySelector("button");
 button.addEventListener("click", first, false);
