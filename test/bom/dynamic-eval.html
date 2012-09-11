@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en-US">
+	<head>
+		<script src="foo.js"></script>
+		<script type="text/javascript">
+			function go() {
+				var a = "var line0 = new Error(); " +
+								"debugger;";
+				var b = eval(a);
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick="go();">Click me!</button>
+	</body>
+</html>
