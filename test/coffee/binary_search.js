@@ -26,5 +26,5 @@
 
 // TODO bug 849069: this should just be "binary_search.map", not a full path.
 /*
-//@ sourceMappingURL=http://past.github.com/test/coffee/binary_search.map
+//@ sourceMappingURL=http://astithas.com/test/coffee/binary_search.map
 */
