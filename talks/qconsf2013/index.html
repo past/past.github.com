@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Advanced Frontend Debugging</title>
+
+		<meta name="description" content="A talk about debugging frontend code using the latest available tools.">
+		<meta name="author" content="Panos Astithas">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Advanced Frontend Debugging</h1>
+					<p>
+						<small><a href="http://astithas.com">Panos Astithas</a> / <a href="http://twitter.com/pastith">@pastith</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>JavaScript Debugging</h2>
+					<ul>
+						<li>Conditional breakpoints</li>
+						<li>Event breakpoints</li>
+						<li>Watch expressions</li>
+						<li>Closure inspection</li>
+					</ul>
+
+					<aside class="notes">
+						breadcrumbs: stack traces show the future not the past
+						safe-for-space closure conversion (and bugs)
+						event loop (multiple debuggers?)
+					</aside>
+				</section>
+
+				<section>
+					<h2>CPU Profiling</h2>
+					<ul>
+						<li>Use a sampling profiler</li>
+						<li>Concentrate on the hot spots</li>
+						<li>Order frames by % of time spent</li>
+						<li>Observe self time vs. other time</li>
+						<li>Enable platform frames for more insights</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Execution Tracing</h2>
+					<ul>
+						<li>Tracing profiler or tracing debugger</li>
+						<li>Observe runtime code paths</li>
+						<li>Reason about program behavior</li>
+						<li>Understand how 3rd-party code works</li>
+						<li>Unsuitable for performance profiling due to overhead</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>CPU Profiling (cont.)</h2>
+					<ul>
+						<li>Other implementations:</li>
+						<li>http://spy-js.com/</li>
+						<li>https://trace.gl/</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Minimizing engine work</h2>
+					<ul>
+						<li>Paintflashing</li>
+						<li>Layer border painting</li>
+						<li>Reflow events</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Optimizing JS objects</h2>
+					<ul>
+						<li>Keep object shapes static</li>
+						<li>delete obj.prop; // bad</li>
+						<li>obj.prop = null; // good</li>
+						<li>Avoid Object.freeze</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Old-School Debugging</h2>
+					<pre><code data-trim contenteditable>
+0 (anonymous) foo.js:100
+1 (anonymous) foo.js:45
+2 (anonymous) bar.js:12
+3 (anonymous) baz.js:123
+4 main        baz.js:44
+					</code></pre>
+					<ul>
+						<li>"Always use named functions!"</li>
+						<li>"Some frameworks and tools understand fn.displayName"</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Engines can infer function names</h2>
+					<p>Anonymous functions no longer need to be named for debugging.
+					</p>
+				</section>
+
+				<section>
+					<h2>Engines can infer function names</h2>
+					<pre><code data-trim contenteditable>
+function f() {}          // display name: f (the given name)
+var g = function () {};  // display name: g
+o.p = function () {};    // display name: o.p
+var q = {
+  r: function () {}      // display name: q.r
+};
+function h() {
+  var i = function() {};    // display name: h/i
+  f(function () {});        // display name: h/<
+}
+var s = f(function () {});  // display name: s<
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Modern Debugging</h2>
+					<pre><code data-trim contenteditable>
+0 f<          foo.js:100
+1 foo/<       foo.js:45
+2 bar/helper  bar.js:12
+3 bar.do      baz.js:123
+4 main        baz.js:44
+					</code></pre>
+					<ul>
+						<li>"Always use named functions!"</li>
+						<li>"Some frameworks and tools understand fn.displayName"</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Working with frameworks</h2>
+					<ul>
+						<li>Source maps</li>
+						<li>Black-boxing</li>
+					</ul>
+
+					<aside>
+						CoffeeScript, TypeScript, Dart, GWT, minified JS sources, stack frames, breakpoints
+						http://gfx.github.io/source-map-inspector/
+						http://evanw.github.io/source-map-visualization/
+
+						jQuery, promises lib, stepping
+					</aside>
+				</section>
+
+				<section>
+					<h2>Debugging mobile apps</h2>
+					<ul>
+						<li>Responsive Design</li>
+						<li>Simulators</li>
+						<li>Remote debugging</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Extending your tools</h2>
+					<ul>
+						<li>GCLI commands</li>
+						<li>Add-ons</li>
+						<li>Browser debugging</li>
+					</ul>
+
+					<aside>
+						This is rarely possible with other platforms.
+					</aside>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
