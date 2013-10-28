@@ -45,29 +45,125 @@
 				</section>
 
 				<section>
-					<h2>JavaScript Debugging</h2>
+					<h2>About me</h2>
+					<a class="image" href="fx-toronto.jpg" target="_blank">
+						<img src="fx-toronto.jpg" alt="Firefox team photo">
+					</a>
 					<ul>
-						<li>Conditional breakpoints</li>
-						<li>Event breakpoints</li>
-						<li>Watch expressions</li>
+						<li>Member of the Firefox Developer Tools team</li>
+						<li>Mainly working on the JS debugger and perf tools</li>
+						<li>Worked with JavaScript, Java, C/C++, Perl and more in 15+ yrs (seen lots of tools)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Agenda</h2>
+					<ol>
+						<li>The case for tools</li>
+						<li>JavaScript Debugging</li>
+						<li>CPU Profiling</li>
+						<li>Execution Tracing</li>
+						<li>Minimizing engine work</li>
+						<li>Micro-optimizations</li>
+						<li>Debugging mobile apps</li>
+						<li>Extending your tools</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>HTML5 &amp; Tools</h2>
+					<blockquote cite="http://blog.tobie.me/post/31366970040/when-im-introspective-about-the-last-few-years-i">
+						&ldquo;I think the biggest mistake that we made, as a company, is betting too much on HTML5&rdquo;<br>
+						-- Mark Zuckerberg, Facebook CEO
+					</blockquote>
+					<blockquote cite="https://www.dropbox.com/s/51bmutcuqikz03e/Visionmobile-Telefonica-How_Can_HTML5_Compete_with_Native.pdf">
+						&ldquo;The biggest issue for HTML5 is the maturity of tools.&rdquo;<br>
+						-- Robert Shilston, FT Labs Director
+					</blockquote>
+				</section>
+
+				<section>
+					<h2>The case for tools</h2>
+					<ul>
+						<li>JS has been around forever</li>
+						<li>People learned to code and debug using alert() <button onclick="alert('this = '+this)">Like this</li>
+						<li>Better tools increase the quality and complexity of the programs we can create</li>
+						<li>A modern platform is not viable without great tool support</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>JavaScript Debugging</h2>
+					<a class="image" href="debugger.png" target="_blank">
+						<img src="debugger.png" alt="JavaScript Debugger">
+					</a>
+				</section>
+
+				<section>
+					<h2>JavaScript Debugging (cont.)</h2>
+					<ul>
+						<li>Call stack visualization</li>
+						<ul>
+							<li>foo(bar(baz())) => foo > bar > baz</li>
+							<li>Stack traces show the future, not the past</li>
+						</ul>
+						<li>Variable inspection</li>
 						<li>Closure inspection</li>
 					</ul>
 
 					<aside class="notes">
-						breadcrumbs: stack traces show the future not the past
 						safe-for-space closure conversion (and bugs)
+					</aside>
+				</section>
+
+				<section>
+					<h2>JavaScript Debugging (cont.)</h2>
+					<ul>
+						<li>Conditional breakpoints</li>
+						<li>Error breakpoints</li>
+						<li>Event breakpoints</li>
+						<li>Watch expressions</li>
+						<li>Inspection from the console</li>
+					</ul>
+
+					<aside class="notes">
 						event loop (multiple debuggers?)
+					</aside>
+				</section>
+
+				<section>
+					<h2>Working with frameworks</h2>
+					<ul>
+						<li>Unminifying/pretty-printing</li>
+						<li>Source maps (<a href="http://gfx.github.io/source-map-inspector/">inspector</a>, <a href="http://evanw.github.io/source-map-visualization/">visualization</a>)</li>
+						<li>Black-boxing</li>
+					</ul>
+
+					<aside class="notes">
+						CoffeeScript, TypeScript, Dart, GWT, minified JS sources, stack frames, breakpoints
+
+						jQuery, promises lib, stepping
 					</aside>
 				</section>
 
 				<section>
 					<h2>CPU Profiling</h2>
 					<ul>
-						<li>Use a sampling profiler</li>
-						<li>Concentrate on the hot spots</li>
+						<li>console.profile/profileEnd</li>
 						<li>Order frames by % of time spent</li>
+						<li>Concentrate on the hot spots</li>
 						<li>Observe self time vs. other time</li>
-						<li>Enable platform frames for more insights</li>
+						<li>Enable platform frames for further insights</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>CPU Profiling (cont.)</h2>
+					<a class="image" href="profiler.png" target="_blank">
+						<img src="profiler.png" width="600" alt="Profiler">
+					</a>
+					<ul>
+						<li>Profiler: red samples indicate the browser was unresponsive</li>
 					</ul>
 				</section>
 
@@ -83,11 +179,11 @@
 				</section>
 
 				<section>
-					<h2>CPU Profiling (cont.)</h2>
+					<h2>Execution Tracing (cont.)</h2>
 					<ul>
 						<li>Other implementations:</li>
-						<li>http://spy-js.com/</li>
-						<li>https://trace.gl/</li>
+						<li><a href="http://spy-js.com">spy-js</a></li>
+						<li><a href="https://trace.gl">traceGL</a></li>
 					</ul>
 				</section>
 
@@ -95,6 +191,10 @@
 					<h2>Minimizing engine work</h2>
 					<ul>
 						<li>Paintflashing</li>
+						<li>Frame rate visualization</li>
+						<ul>
+							<li>layers.acceleration.draw-fps: true</li>
+						</ul>
 						<li>Layer border painting</li>
 						<li>Reflow events</li>
 					</ul>
@@ -120,7 +220,7 @@
 4 main        baz.js:44
 					</code></pre>
 					<ul>
-						<li>"Always use named functions!"</li>
+						<li>"Always use named functions"</li>
 						<li>"Some frameworks and tools understand fn.displayName"</li>
 					</ul>
 				</section>
@@ -129,10 +229,6 @@
 					<h2>Engines can infer function names</h2>
 					<p>Anonymous functions no longer need to be named for debugging.
 					</p>
-				</section>
-
-				<section>
-					<h2>Engines can infer function names</h2>
 					<pre><code data-trim contenteditable>
 function f() {}          // display name: f (the given name)
 var g = function () {};  // display name: g
@@ -158,45 +254,69 @@ var s = f(function () {});  // display name: s<
 4 main        baz.js:44
 					</code></pre>
 					<ul>
-						<li>"Always use named functions!"</li>
-						<li>"Some frameworks and tools understand fn.displayName"</li>
+						<li>"Never use named functions"</li>
+						<li>"Don't bother with fn.displayName"</li>
 					</ul>
-				</section>
-
-				<section>
-					<h2>Working with frameworks</h2>
-					<ul>
-						<li>Source maps</li>
-						<li>Black-boxing</li>
-					</ul>
-
-					<aside>
-						CoffeeScript, TypeScript, Dart, GWT, minified JS sources, stack frames, breakpoints
-						http://gfx.github.io/source-map-inspector/
-						http://evanw.github.io/source-map-visualization/
-
-						jQuery, promises lib, stepping
-					</aside>
 				</section>
 
 				<section>
 					<h2>Debugging mobile apps</h2>
+					<a class="image" href="responsive-mode.png" target="_blank">
+						<img src="responsive-mode.png" width="600" alt="Responsive Design Mode">
+					</a>
 					<ul>
-						<li>Responsive Design</li>
-						<li>Simulators</li>
-						<li>Remote debugging</li>
+						<li>Responsive Design: test layout behavior in different screen sizes</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Debugging mobile apps (cont.)</h2>
+					<a class="image" href="simulator.png" target="_blank">
+						<img src="simulator.png" width="150" alt="Firefox OS Simulator">
+					</a>
+					<ul>
+						<li>Simulators: debug issues related to APIs unavailable on desktop</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Debugging mobile apps (cont.)</h2>
+					<a class="image" href="device.png" target="_blank">
+						<img src="device.png" width="600" alt="Remote debugging">
+					</a>
+					<ul>
+						<li>Remote debugging: diagnose problems that only manifest themselves in the real thing</li>
 					</ul>
 				</section>
 
 				<section>
 					<h2>Extending your tools</h2>
+					<a class="image" href="gcli.png" target="_blank">
+						<img src="gcli.png" width="600" alt="Command line">
+					</a>
+					<p>
+						GCLI commands (<a href="https://developer.mozilla.org/en-US/docs/Tools/GCLI#Extending_the_Command_Line">docs</a>)
+					</p>
+					<pre><code data-trim contenteditable>
+gcli.addCommand({
+  name: 'countdivs',
+  exec: function(args, context) {
+    return context.environment.document.querySelectorAll('div').length;
+  }
+});					</code></pre>
+				</section>
+
+				<section>
+					<h2>Extending your tools (cont.)</h2>
+					<a class="image" href="https://github.com/victorporof/Restartless-Template" target="_blank">
+						<img src="firefox-restartless-addon.png" alt="Tool skeleton">
+					</a>
 					<ul>
-						<li>GCLI commands</li>
-						<li>Add-ons</li>
+						<li>Add-ons (<a href="https://github.com/victorporof/Restartless-Template">template</a>)</li>
 						<li>Browser debugging</li>
 					</ul>
 
-					<aside>
+					<aside class="notes">
 						This is rarely possible with other platforms.
 					</aside>
 				</section>
@@ -224,8 +344,6 @@ var s = f(function () {});  // display name: s<
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
