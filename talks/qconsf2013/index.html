@@ -26,6 +26,10 @@
 			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
 		</script>
 
+		<script type="text/javascript" src="js/stacks.js"></script>
+		<script type="text/javascript" src="js/breakpoints.js"></script>
+		<script type="text/javascript" src="js/profiling.js"></script>
+
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -50,9 +54,9 @@
 						<img src="fx-toronto.jpg" alt="Firefox team photo">
 					</a>
 					<ul>
-						<li>Member of the Firefox Developer Tools team</li>
-						<li>Mainly working on the JS debugger and perf tools</li>
-						<li>Worked with JavaScript, Java, C/C++, Perl and more in 15+ yrs (seen lots of tools)</li>
+						<li class="fragment">Member of the Firefox Developer Tools team</li>
+						<li class="fragment">Mainly working on the JS debugger and perf tools</li>
+						<li class="fragment">Worked with JavaScript, Java, C/C++, Perl and more in 15+ yrs (seen lots of tools)</li>
 					</ul>
 				</section>
 
@@ -86,8 +90,8 @@
 					<h2>The case for tools</h2>
 					<ul>
 						<li>JS has been around forever</li>
-						<li>People learned to code and debug using alert() <button onclick="alert('this = '+this)">Like this</li>
-						<li>Better tools increase the quality and complexity of the programs we can create</li>
+						<li>People learned to code and debug using alert() <button onclick="alert('this = '+this)">Like this</button></li>
+						<li>With better tools we can create more robust and more complex programs <button onclick="console.dir(this)">Like this</button></li>
 						<li>A modern platform is not viable without great tool support</li>
 					</ul>
 				</section>
@@ -104,14 +108,16 @@
 					<ul>
 						<li>Call stack visualization</li>
 						<ul>
-							<li>foo(bar(baz())) => foo > bar > baz</li>
-							<li>Stack traces show the future, not the past</li>
+							<li class="fragment">foo(bar(baz())) => foo > bar > baz <button id="call-stack-btn">Observe</button></li>
+							<li class="fragment">Stack traces <a href="http://calculist.blogspot.gr/2006/03/call-stack-is-not-history.html" target="_blank">show the future</a>, not the past</li>
 						</ul>
-						<li>Variable inspection</li>
-						<li>Closure inspection</li>
+						<li class="fragment">Variable inspection</li>
+						<li class="fragment">Closure inspection</li>
 					</ul>
 
 					<aside class="notes">
+						host object inspection provides insights into the platform
+						step-out allows inspection of the return value
 						safe-for-space closure conversion (and bugs)
 					</aside>
 				</section>
@@ -119,11 +125,11 @@
 				<section>
 					<h2>JavaScript Debugging (cont.)</h2>
 					<ul>
-						<li>Conditional breakpoints</li>
-						<li>Error breakpoints</li>
-						<li>Event breakpoints</li>
-						<li>Watch expressions</li>
-						<li>Inspection from the console</li>
+						<li>Conditional breakpoints <button id="breakpoint-btn">Let's play</button></li>
+						<li class="fragment">Error breakpoints</li>
+						<li class="fragment">Event breakpoints</li>
+						<li class="fragment">Watch expressions</li>
+						<li class="fragment">Inspection from the console</li>
 					</ul>
 
 					<aside class="notes">
@@ -148,8 +154,19 @@
 
 				<section>
 					<h2>CPU Profiling</h2>
+					<a class="image" href="profiler.png" target="_blank">
+						<img src="profiler.png" width="600" alt="Profiler">
+					</a>
+
+					<aside class="notes">
+						Red samples indicate the browser was unresponsive
+					</aside>
+				</section>
+
+				<section>
+					<h2>CPU Profiling (cont.)</h2>
 					<ul>
-						<li>console.profile/profileEnd</li>
+						<li>console.profile/profileEnd <button id="profiling-btn">Start</button></li>
 						<li>Order frames by % of time spent</li>
 						<li>Concentrate on the hot spots</li>
 						<li>Observe self time vs. other time</li>
@@ -159,11 +176,11 @@
 
 				<section>
 					<h2>CPU Profiling (cont.)</h2>
-					<a class="image" href="profiler.png" target="_blank">
-						<img src="profiler.png" width="600" alt="Profiler">
+					<a class="image" href="profiler-ng.png" target="_blank">
+						<img src="profiler-ng.png" width="600" alt="Next-gen Profiler">
 					</a>
 					<ul>
-						<li>Profiler: red samples indicate the browser was unresponsive</li>
+						<li>Exposing the rendering engine behavior</li>
 					</ul>
 				</section>
 
