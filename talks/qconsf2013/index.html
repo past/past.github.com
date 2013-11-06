@@ -89,10 +89,10 @@
 				<section>
 					<h2>The case for tools</h2>
 					<ul>
-						<li>JS has been around forever</li>
-						<li>People learned to code and debug using alert() <button onclick="alert('this = '+this)">Like this</button></li>
-						<li>With better tools we can create more robust and more complex programs <button onclick="console.dir(this)">Like this</button></li>
-						<li>A modern platform is not viable without great tool support</li>
+						<li class="fragment">JS has been around forever</li>
+						<li class="fragment">People learned to code and debug using alert() <button onclick="alert('this = '+this)">Like this</button></li>
+						<li class="fragment">With better tools we can create more robust and more complex programs <button onclick="console.dir(this)">Like this</button></li>
+						<li class="fragment">A modern platform is not viable without great tool support</li>
 					</ul>
 				</section>
 
@@ -129,7 +129,7 @@
 						<li class="fragment">Error breakpoints</li>
 						<li class="fragment">Event breakpoints</li>
 						<li class="fragment">Watch expressions</li>
-						<li class="fragment">Inspection from the console</li>
+						<li class="fragment">Console inspection</li>
 					</ul>
 
 					<aside class="notes">
@@ -140,9 +140,9 @@
 				<section>
 					<h2>Working with frameworks</h2>
 					<ul>
-						<li>Unminifying/pretty-printing</li>
-						<li>Source maps (<a href="http://gfx.github.io/source-map-inspector/">inspector</a>, <a href="http://evanw.github.io/source-map-visualization/">visualization</a>)</li>
-						<li>Black-boxing</li>
+						<li class="fragment">Unminifying/pretty-printing</li>
+						<li class="fragment">Source maps (<a href="http://gfx.github.io/source-map-inspector/" target="_blank">inspector</a>, <a href="http://evanw.github.io/source-map-visualization/" target="_blank">visualization</a>)</li>
+						<li class="fragment">Black-boxing</li>
 					</ul>
 
 					<aside class="notes">
@@ -167,10 +167,10 @@
 					<h2>CPU Profiling (cont.)</h2>
 					<ul>
 						<li>console.profile/profileEnd <button id="profiling-btn">Start</button></li>
-						<li>Order frames by % of time spent</li>
-						<li>Concentrate on the hot spots</li>
-						<li>Observe self time vs. other time</li>
-						<li>Enable platform frames for further insights</li>
+						<li class="fragment">Concentrate on the hot spots</li>
+						<li class="fragment">Observe self time vs. other time</li>
+						<li class="fragment">Identify jank</li>
+						<li class="fragment">Enable platform profiling for further insights</li>
 					</ul>
 				</section>
 
@@ -179,19 +179,77 @@
 					<a class="image" href="profiler-ng.png" target="_blank">
 						<img src="profiler-ng.png" width="600" alt="Next-gen Profiler">
 					</a>
+					<p>
+						Exposing the rendering engine behavior
+					</p>
+				</section>
+
+				<section>
+					<h2>Minimizing engine work</h2>
+					<a class="image" href="paint-flashing-activated.png" target="_blank">
+						<img src="paint-flashing-activated.png" width="500" alt="Paint flashing">
+					</a>
+					<p>
+						Paintflashing
+					</p>
+				</section>
+
+				<section>
+					<h2>Minimizing engine work (cont.)</h2>
+					<a class="image" href="layers.png" target="_blank">
+						<img src="layers.png" width="260" alt="Layer border painting">
+					</a>
+					<p>
+						<ul>
+							<li>Layer border painting</li>
+							<li class="fragment">Set layers.draw-borders: true</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Minimizing engine work (cont.)</h2>
+					<a class="image" href="reflow.png" target="_blank">
+						<img src="reflow.png" alt="Reflow logging">
+					</a>
 					<ul>
-						<li>Exposing the rendering engine behavior</li>
+						<li>Reflow events</li>
+						<li class="fragment">Frame rate visualization</li>
+						<ul>
+							<li class="fragment">Set layers.acceleration.draw-fps: true</li>
+						</ul>
 					</ul>
+				</section>
+
+				<section>
+					<h2>Optimizing JS objects</h2>
+					<ul>
+						<li class="fragment">Keep object shapes static</li>
+						<li class="fragment">delete obj.prop; // <span style="color: #f55;">bad</span></li>
+						<li class="fragment">obj.prop = undefined; // <span style="color: #6f6;">good</span></li>
+						<li class="fragment">obj.prop = null; // <span style="color: #6f6;">good</span></li>
+						<li class="fragment">Cautiously consider Object.freeze</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Memory Profiling</h2>
+					<a class="image" href="memory-monitor.png" target="_blank">
+						<img src="memory-monitor.png" alt="Memory monitor">
+					</a>
+					<p>
+						Memory monitor
+					</p>
 				</section>
 
 				<section>
 					<h2>Execution Tracing</h2>
 					<ul>
 						<li>Tracing profiler or tracing debugger</li>
-						<li>Observe runtime code paths</li>
-						<li>Reason about program behavior</li>
-						<li>Understand how 3rd-party code works</li>
-						<li>Unsuitable for performance profiling due to overhead</li>
+						<li class="fragment">Observe runtime code paths</li>
+						<li class="fragment">Reason about program behavior</li>
+						<li class="fragment">Understand how 3rd-party code works</li>
+						<li class="fragment">Unsuitable for performance profiling due to overhead</li>
 					</ul>
 				</section>
 
@@ -201,29 +259,6 @@
 						<li>Other implementations:</li>
 						<li><a href="http://spy-js.com">spy-js</a></li>
 						<li><a href="https://trace.gl">traceGL</a></li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Minimizing engine work</h2>
-					<ul>
-						<li>Paintflashing</li>
-						<li>Frame rate visualization</li>
-						<ul>
-							<li>layers.acceleration.draw-fps: true</li>
-						</ul>
-						<li>Layer border painting</li>
-						<li>Reflow events</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Optimizing JS objects</h2>
-					<ul>
-						<li>Keep object shapes static</li>
-						<li>delete obj.prop; // bad</li>
-						<li>obj.prop = null; // good</li>
-						<li>Avoid Object.freeze</li>
 					</ul>
 				</section>
 
@@ -244,7 +279,7 @@
 
 				<section>
 					<h2>Engines can infer function names</h2>
-					<p>Anonymous functions no longer need to be named for debugging.
+					<p>Anonymous functions no longer need to be named for debugging
 					</p>
 					<pre><code data-trim contenteditable>
 function f() {}          // display name: f (the given name)
@@ -329,7 +364,7 @@ gcli.addCommand({
 						<img src="firefox-restartless-addon.png" alt="Tool skeleton">
 					</a>
 					<ul>
-						<li>Add-ons (<a href="https://github.com/victorporof/Restartless-Template">template</a>)</li>
+						<li>Add-ons (<a href="https://github.com/victorporof/Restartless-Template" target="_blank">template</a>)</li>
 						<li>Browser debugging</li>
 					</ul>
 
@@ -341,9 +376,16 @@ gcli.addCommand({
 				<section>
 					<h2>Thank You</h2>
 					<ul>
-						<li>You can reach me as <a href="https://twitter.com/pastith" target="_blank">@pastith</a> on Twitter</li>
-						<li><a href="http://astithas.com/talks/qconsf2013/" target="_blank">Slides</a> for this talk</li>
-						<li><a href="https://developer.mozilla.org/docs/Tools" target="_blank">Docs</a> on Firefox Developer Tools</li>
+						<li>Questions, feedback:</li>
+						<ul>
+							<li><a href="https://twitter.com/pastith" target="_blank">@pastith</a> on Twitter</li>
+							<li>pastith @GMail</li>
+						</ul>
+						<li>Homework:</li>
+						<ul>
+							<li>Slides: <a href="http://astithas.com/talks/qconsf2013/" target="_blank">astithas.com/talks/qconsf2013/</a></li>
+						<li>Firefox Developer Tools: <a href="https://developer.mozilla.org/docs/Tools" target="_blank">developer.mozilla.org/docs/Tools</a></li>
+						</ul>
 					</ul>
 				</section>
 
