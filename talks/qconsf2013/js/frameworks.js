@@ -8,7 +8,16 @@
 
   function run() {
     $("li").each(function(index) {
-      console.log(index + ": " + $(this).text());
+      createText(index, $(this).text()).then(function(text) {
+        console.log(text);
+        return index;
+      });
     });
+  }
+
+  function createText(index, text) {
+    var result = $.Deferred();
+    result.resolve(index + ": " + text);
+    return result;
   }
 })();
