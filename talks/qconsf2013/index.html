@@ -29,6 +29,7 @@
 		<script type="text/javascript" src="js/stacks.js"></script>
 		<script type="text/javascript" src="js/breakpoints.js"></script>
 		<script type="text/javascript" src="js/profiling.js"></script>
+		<script type="text/javascript" src="js/tracing.js"></script>
 
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
@@ -246,7 +247,7 @@
 					<h2>Execution Tracing</h2>
 					<ul>
 						<li>Tracing profiler or tracing debugger</li>
-						<li class="fragment">Observe runtime code paths</li>
+						<li class="fragment">Observe runtime code paths <button id="tracing-btn">Start</button></li>
 						<li class="fragment">Reason about program behavior</li>
 						<li class="fragment">Understand how 3rd-party code works</li>
 						<li class="fragment">Unsuitable for performance profiling due to overhead</li>
@@ -255,11 +256,14 @@
 
 				<section>
 					<h2>Execution Tracing (cont.)</h2>
-					<ul>
-						<li>Other implementations:</li>
-						<li><a href="http://spy-js.com">spy-js</a></li>
-						<li><a href="https://trace.gl">traceGL</a></li>
-					</ul>
+					<a class="image" href="tracer.png" target="_blank">
+						<img src="tracer.png" alt="Tracer">
+					</a>
+					<p>
+						Other implementations:
+						<a href="http://spy-js.com" target="_blank">spy-js</a>,
+						<a href="https://trace.gl" target="_blank">traceGL</a>
+					</p>
 				</section>
 
 				<section>
