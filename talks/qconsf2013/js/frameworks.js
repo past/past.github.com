@@ -8,6 +8,7 @@
 
   function run() {
     $("li").each(function(index) {
+      debugger;
       createText(index, $(this).text()).then(function(text) {
         console.log(text);
         return index;

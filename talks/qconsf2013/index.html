@@ -119,11 +119,11 @@
 					<ol>
 						<li>The case for tools</li>
 						<li>JavaScript Debugging</li>
-						<li>CPU Profiling</li>
+						<li>Profiling</li>
 						<li>Minimizing engine work</li>
 						<li>Execution Tracing</li>
-						<li>Debugging mobile apps</li>
 						<li>WebGL Debugging</li>
+						<li>Debugging mobile apps</li>
 					</ol>
 				</section>
 
@@ -147,6 +147,10 @@
 						<li class="fragment">With better tools we can create more robust and more complex programs <button onclick="console.dir(this)">Like this</button></li>
 						<li class="fragment">A modern platform is not viable without great tool support</li>
 					</ul>
+				</section>
+
+				<section>
+					<h1>Inspection</h1>
 				</section>
 
 				<section>
@@ -180,7 +184,8 @@
 				<section>
 					<h2>Pausing Execution</h2>
 					<ul>
-						<li>Conditional breakpoints <button id="breakpoint-btn">Let's play</button></li>
+						<li>Breakpoints</li>
+						<li class="fragment">Conditional breakpoints <button id="breakpoint-btn">Let's play</button></li>
 						<li class="fragment">Error breakpoints</li>
 						<li class="fragment">Event breakpoints</li>
 					</ul>
@@ -202,6 +207,11 @@
 						CoffeeScript, TypeScript, Dart, GWT, minified JS sources, stack frames, breakpoints
 						jQuery, promises lib, stepping
 					</aside>
+				</section>
+
+				<section>
+					<h1>Profiling</h1>
+					<h1>&amp; Performance</h1>
 				</section>
 
 				<section>
@@ -247,20 +257,20 @@
 				</section>
 
 				<section>
-					<h2>Minimizing engine work (cont.)</h2>
-					<a class="image" href="reflow.png" target="_blank">
-						<img src="reflow.png" alt="Reflow logging">
-					</a>
-					<ul>
-						<li>Reflow events</li>
-						<li class="fragment">Frame rate visualization</li>
+					<section>
+						<h2>Avoiding reflows</h2>
+						<a class="image" href="reflow.png" target="_blank">
+							<img src="reflow.png" alt="Reflow logging">
+						</a>
 						<ul>
-							<li class="fragment">Set layers.acceleration.draw-fps: true</li>
+							<li>Reflow events</li>
+							<li class="fragment">Frame rate visualization</li>
+							<ul>
+								<li class="fragment">Set layers.acceleration.draw-fps: true</li>
+							</ul>
 						</ul>
-					</ul>
-				</section>
+					</section>
 
-				<section>
 					<section>
 						<h2>Minimizing engine work (cont.)</h2>
 						<a class="image" href="layers.png" target="_blank">
@@ -295,6 +305,10 @@
 						</p>
 					</section>
 
+				</section>
+
+				<section>
+					<h1>Tracing</h1>
 				</section>
 
 				<section>
@@ -372,6 +386,25 @@
 				</section>
 
 				<section>
+					<h1>WebGL</h1>
+				</section>
+
+				<section>
+					<h2>Debugging WebGL</h2>
+			    <canvas id="glcanvas" width="640" height="480">
+			      Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.
+			    </canvas>
+			    <video id="video">
+			      Your browser doesn't appear to support the HTML5 <code>&lt;video&gt;</code> element.
+			    </video>
+			    <p><button id="shader-btn">Start</button> WebGL <a hhref="https://developer.mozilla.org/docs/Web/WebGL/Animating_textures_in_WebGL" target="_blank">demo</a></p>
+				</section>
+
+				<section>
+					<h1>Mobile Apps</h1>
+				</section>
+
+				<section>
 					<h2>Responsive Design</h2>
 					<a class="image" href="responsive-mode.png" target="_blank">
 						<img src="responsive-mode.png" width="600" alt="Responsive Design Mode">
@@ -392,25 +425,14 @@
 				</section>
 
 				<section>
-					<h2>Remote debugging</h2>
-					<a class="image" href="device.png" target="_blank">
-						<img src="device.png" width="600" alt="Remote debugging">
-					</a>
-					<p>
-						Diagnose problems that only manifest themselves in the real thing
-					</p>
-				</section>
-
-				<section>
 					<section>
-						<h2>Debugging WebGL</h2>
-				    <canvas id="glcanvas" width="640" height="480">
-				      Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.
-				    </canvas>
-				    <video id="video">
-				      Your browser doesn't appear to support the HTML5 <code>&lt;video&gt;</code> element.
-				    </video>
-				    <p><button id="shader-btn">Start</button> WebGL <a hhref="https://developer.mozilla.org/docs/Web/WebGL/Animating_textures_in_WebGL" target="_blank">demo</a></p>
+						<h2>Remote debugging</h2>
+						<a class="image" href="device.png" target="_blank">
+							<img src="device.png" width="600" alt="Remote debugging">
+						</a>
+						<p>
+							Diagnose problems that only manifest themselves in the real thing
+						</p>
 					</section>
 
 					<section>
