@@ -17,6 +17,7 @@
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
     <link rel="stylesheet" href="css/webgl.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
 
 		<!-- For syntax highlighting -->
@@ -143,8 +144,8 @@
 					<h2>The case for tools</h2>
 					<ul>
 						<li class="fragment">JS has been around forever</li>
-						<li class="fragment">People learned to code and debug using alert() <button onclick="alert('this = '+this)">Like this</button></li>
-						<li class="fragment">With better tools we can create more robust and more complex programs <button onclick="console.dir(this)">Like this</button></li>
+						<li class="fragment">People learned to code and debug using alert() <button onclick="alert('this = '+this)">&#x25b6;</button></li>
+						<li class="fragment">With better tools we can create more robust and more complex programs <button onclick="console.dir(this)">&#x25b6;</button></li>
 						<li class="fragment">A modern platform is not viable without great tool support</li>
 					</ul>
 				</section>
@@ -165,7 +166,7 @@
 					<ul>
 						<li>Call stack visualization</li>
 						<ul>
-							<li class="fragment">foo(bar(baz())) => foo > bar > baz <button id="call-stack-btn">Observe</button></li>
+							<li class="fragment">foo > bar > baz <button id="call-stack-btn">&#x25b6;</button></li>
 							<li class="fragment">Stack traces <a href="http://calculist.blogspot.gr/2006/03/call-stack-is-not-history.html" target="_blank">show the future</a>, not the past</li>
 						</ul>
 						<li class="fragment">Variable inspection</li>
@@ -185,7 +186,7 @@
 					<h2>Pausing Execution</h2>
 					<ul>
 						<li>Breakpoints</li>
-						<li class="fragment">Conditional breakpoints <button id="breakpoint-btn">Let's play</button></li>
+						<li class="fragment">Conditional breakpoints <button id="breakpoint-btn">&#x25b6;</button></li>
 						<li class="fragment">Error breakpoints</li>
 						<li class="fragment">Event breakpoints</li>
 					</ul>
@@ -200,7 +201,7 @@
 					<ul>
 						<li class="fragment">Unminifying/pretty-printing</li>
 						<li class="fragment">Source maps (<a href="http://gfx.github.io/source-map-inspector/" target="_blank">inspector</a>, <a href="http://evanw.github.io/source-map-visualization/" target="_blank">visualization</a>)</li>
-						<li class="fragment">Black-boxing <button id="framework-btn">Test</button></li>
+						<li class="fragment">Black-boxing <button id="framework-btn">&#x25b6;</button></li>
 					</ul>
 
 					<aside class="notes">
@@ -228,7 +229,7 @@
 				<section>
 					<h2>CPU Profiling (cont.)</h2>
 					<ul>
-						<li>console.profile/profileEnd <button id="profiling-btn">Start</button></li>
+						<li>console.profile/profileEnd <button id="profiling-btn">&#x25b6;</button></li>
 						<li class="fragment">Concentrate on the hot spots</li>
 						<li class="fragment">Observe self time vs. other time</li>
 						<li class="fragment">Identify jank</li>
@@ -315,7 +316,7 @@
 					<h2>Execution Tracing</h2>
 					<ul>
 						<li>Tracing profiler or tracing debugger</li>
-						<li class="fragment">Observe runtime code paths <button id="tracing-btn">Start</button></li>
+						<li class="fragment">Observe runtime code paths <button id="tracing-btn">&#x25b6;</button></li>
 						<li class="fragment">Reason about program behavior</li>
 						<li class="fragment">Understand how 3rd-party code works</li>
 						<li class="fragment">Unsuitable for performance profiling due to overhead</li>
@@ -397,7 +398,7 @@
 			    <video id="video">
 			      Your browser doesn't appear to support the HTML5 <code>&lt;video&gt;</code> element.
 			    </video>
-			    <p><button id="shader-btn">Start</button> WebGL <a hhref="https://developer.mozilla.org/docs/Web/WebGL/Animating_textures_in_WebGL" target="_blank">demo</a></p>
+			    <p><button id="shader-btn">&#x25b6;</button> WebGL <a hhref="https://developer.mozilla.org/docs/Web/WebGL/Animating_textures_in_WebGL" target="_blank">demo</a></p>
 				</section>
 
 				<section>
