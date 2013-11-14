@@ -160,6 +160,16 @@
 					<a class="image" href="debugger.png" target="_blank">
 						<img src="debugger.png" alt="JavaScript Debugger">
 					</a>
+					<ul>
+						<li class="fragment">Search queries and combinations</li>
+						<ul>
+							<li class="fragment">Function definitions</li>
+						</ul>
+						<li class="fragment">Stepping</li>
+						<ul>
+							<li class="fragment">Step-out allows inspection of the return value</li>
+						</ul>
+					</ul>
 				</section>
 
 				<section>
@@ -171,16 +181,16 @@
 							<li class="fragment">Stack traces <a href="http://calculist.blogspot.gr/2006/03/call-stack-is-not-history.html" target="_blank">show the future</a>, not the past</li>
 						</ul>
 						<li class="fragment">Variable inspection</li>
+						<ul>
+							<li class="fragment">Host object inspection provides insights into the platform</li>
+						</ul>
 						<li class="fragment">Closure inspection</li>
+						<ul>
+							<li class="fragment">safe-for-space closure conversion</li>
+						</ul>
 						<li class="fragment">Watch expressions</li>
 						<li class="fragment">Inspecting from the Console</li>
 					</ul>
-
-					<aside class="notes">
-						host object inspection provides insights into the platform
-						step-out allows inspection of the return value
-						safe-for-space closure conversion (and bugs)
-					</aside>
 				</section>
 
 				<section>
@@ -190,11 +200,8 @@
 						<li class="fragment">Conditional breakpoints <button id="breakpoint-btn">&#x25b6;</button></li>
 						<li class="fragment">Error breakpoints</li>
 						<li class="fragment">Event breakpoints</li>
+						<li class="fragment">Multiple pauses and the event loop</li>
 					</ul>
-
-					<aside class="notes">
-						event loop (multiple debuggers?)
-					</aside>
 				</section>
 
 				<section>
@@ -202,13 +209,12 @@
 					<ul>
 						<li class="fragment">Unminifying/pretty-printing</li>
 						<li class="fragment">Source maps (<a href="http://gfx.github.io/source-map-inspector/" target="_blank">inspector</a>, <a href="http://evanw.github.io/source-map-visualization/" target="_blank">visualization</a>)</li>
+						<ul>
+							<li class="fragment">Debug <a href="http://dl.dropboxusercontent.com/u/39519/sourcemapapp/index.html" target="_blank">concatenated and minified</a> code</li>
+							<li class="fragment">Debug transpiled languages (<a href="http://hg.mozilla.org/mozilla-central/raw-file/7b014f0f3b03/browser/devtools/debugger/test/doc_binary_search.html" target="_blank">CoffeeScript</a>, TypeScript, Dart, GWT, etc.)</li>
+						</ul>
 						<li class="fragment">Black-boxing <button id="framework-btn">&#x25b6;</button></li>
 					</ul>
-
-					<aside class="notes">
-						CoffeeScript, TypeScript, Dart, GWT, minified JS sources, stack frames, breakpoints
-						jQuery, promises lib, stepping
-					</aside>
 				</section>
 
 				<section>
@@ -259,54 +265,52 @@
 				</section>
 
 				<section>
-					<section>
-						<h2>Avoiding reflows</h2>
-						<a class="image" href="reflow.png" target="_blank">
-							<img src="reflow.png" alt="Reflow logging">
-						</a>
+					<h2>Avoiding reflows</h2>
+					<a class="image" href="reflow.png" target="_blank">
+						<img src="reflow.png" alt="Reflow logging">
+					</a>
+					<ul>
+						<li>Reflow events</li>
+						<li class="fragment">Frame rate visualization</li>
 						<ul>
-							<li>Reflow events</li>
-							<li class="fragment">Frame rate visualization</li>
-							<ul>
-								<li class="fragment">Set layers.acceleration.draw-fps: true</li>
-							</ul>
+							<li class="fragment">Set layers.acceleration.draw-fps: true</li>
 						</ul>
-					</section>
+					</ul>
+				</section>
 
-					<section>
-						<h2>Minimizing engine work (cont.)</h2>
-						<a class="image" href="layers.png" target="_blank">
-							<img src="layers.png" width="260" alt="Layer border painting">
-						</a>
-						<p>
-							<ul>
-								<li>Layer border painting</li>
-								<li class="fragment">Set layers.draw-borders: true</li>
-							</ul>
-						</p>
-					</section>
-
-					<section>
-						<h2>Optimizing JS objects</h2>
+				<section>
+					<h2>Minimizing engine work (cont.)</h2>
+					<a class="image" href="layers.png" target="_blank">
+						<img src="layers.png" width="260" alt="Layer border painting">
+					</a>
+					<p>
 						<ul>
-							<li class="fragment">Keep object shapes static</li>
-							<li class="fragment">delete obj.prop; // <span style="color: #f55;">bad</span></li>
-							<li class="fragment">obj.prop = undefined; // <span style="color: #6f6;">good</span></li>
-							<li class="fragment">obj.prop = null; // <span style="color: #6f6;">good</span></li>
-							<li class="fragment">Cautiously consider Object.freeze</li>
+							<li>Layer border painting</li>
+							<li class="fragment">Set layers.draw-borders: true</li>
 						</ul>
-					</section>
+					</p>
+				</section>
 
-					<section>
-						<h2>Memory Profiling</h2>
-						<a class="image" href="memory-monitor.png" target="_blank">
-							<img src="memory-monitor.png" alt="Memory monitor">
-						</a>
-						<p>
-							Memory monitor
-						</p>
-					</section>
+				<section>
+					<h2>Optimizing JS objects</h2>
+					<ul>
+						<li class="fragment">Keep object shapes static</li>
+						<li class="fragment">delete obj.prop; // <span style="color: #f55;">bad</span></li>
+						<li class="fragment">obj.prop = undefined; // <span style="color: #6f6;">good</span></li>
+						<li class="fragment">obj.prop = null; // <span style="color: #6f6;">good</span></li>
+						<li class="fragment">Cautiously consider Object.freeze</li>
+						<li class="fragment"><a href="http://jsperf.com/delete-vs-undefined-vs-null/16" target="_blank">jsPerf</a></li>
+					</ul>
+				</section>
 
+				<section>
+					<h2>Memory Profiling</h2>
+					<a class="image" href="memory-monitor.png" target="_blank">
+						<img src="memory-monitor.png" alt="Memory monitor">
+					</a>
+					<p>
+						Memory monitor
+					</p>
 				</section>
 
 				<section>
@@ -325,66 +329,64 @@
 				</section>
 
 				<section>
-					<section>
-						<h2>Execution Tracing Implementations</h2>
-						<a class="image" href="tracer.png" target="_blank">
-							<img src="tracer.png" alt="Tracer">
-						</a>
-						<p>
-							Other implementations:
-							<a href="http://spy-js.com" target="_blank">spy-js</a>,
-							<a href="https://trace.gl" target="_blank">traceGL</a>
-						</p>
-					</section>
+					<h2>Execution Tracing Implementations</h2>
+					<a class="image" href="tracer.png" target="_blank">
+						<img src="tracer.png" alt="Tracer">
+					</a>
+					<p>
+						Other implementations:
+						<a href="http://spy-js.com" target="_blank">spy-js</a>,
+						<a href="https://trace.gl" target="_blank">traceGL</a>
+					</p>
+				</section>
 
-					<section>
-						<h2>Old-School Debugging</h2>
-						<pre><code data-trim contenteditable>
-	0 (anonymous) foo.js:100
-	1 (anonymous) foo.js:45
-	2 (anonymous) bar.js:12
-	3 (anonymous) baz.js:123
-	4 main        baz.js:44
-						</code></pre>
-						<ul>
-							<li>"Always use named functions"</li>
-							<li>"Some frameworks and tools understand fn.displayName"</li>
-						</ul>
-					</section>
+				<section>
+					<h2>Old-School Debugging</h2>
+					<pre><code data-trim contenteditable>
+0 (anonymous) foo.js:100
+1 (anonymous) foo.js:45
+2 (anonymous) bar.js:12
+3 (anonymous) baz.js:123
+4 main        baz.js:44
+					</code></pre>
+					<ul>
+						<li>"Always use named functions"</li>
+						<li>"Some frameworks and tools understand fn.displayName"</li>
+					</ul>
+				</section>
 
-					<section>
-						<h2>Engines can infer function names</h2>
-						<p>Anonymous functions no longer need to be named for debugging
-						</p>
-						<pre><code data-trim contenteditable>
-	function f() {}          // display name: f (the given name)
-	var g = function () {};  // display name: g
-	o.p = function () {};    // display name: o.p
-	var q = {
-	  r: function () {}      // display name: q.r
-	};
-	function h() {
-	  var i = function() {};    // display name: h/i
-	  f(function () {});        // display name: h/<
-	}
-	var s = f(function () {});  // display name: s<
-						</code></pre>
-					</section>
+				<section>
+					<h2>Engines can infer function names</h2>
+					<p>Anonymous functions no longer need to be named for debugging
+					</p>
+					<pre><code data-trim contenteditable>
+function f() {}          // display name: f (the given name)
+var g = function () {};  // display name: g
+o.p = function () {};    // display name: o.p
+var q = {
+  r: function () {}      // display name: q.r
+};
+function h() {
+  var i = function() {};    // display name: h/i
+  f(function () {});        // display name: h/<
+}
+var s = f(function () {});  // display name: s<
+					</code></pre>
+				</section>
 
-					<section>
-						<h2>Modern Debugging</h2>
-						<pre><code data-trim contenteditable>
-	0 f<          foo.js:100
-	1 foo/<       foo.js:45
-	2 bar/helper  bar.js:12
-	3 bar.do      baz.js:123
-	4 main        baz.js:44
-						</code></pre>
-						<ul>
-							<li>"Never use named functions"</li>
-							<li>"Don't bother with fn.displayName"</li>
-						</ul>
-					</section>
+				<section>
+					<h2>Modern Debugging</h2>
+					<pre><code data-trim contenteditable>
+0 f<          foo.js:100
+1 foo/<       foo.js:45
+2 bar/helper  bar.js:12
+3 bar.do      baz.js:123
+4 main        baz.js:44
+					</code></pre>
+					<ul>
+						<li>"Never use named functions"</li>
+						<li>"Don't bother with fn.displayName"</li>
+					</ul>
 				</section>
 
 				<section>
@@ -428,48 +430,45 @@
 				</section>
 
 				<section>
-					<section>
-						<h2>Remote debugging</h2>
-						<a class="image" href="device.png" target="_blank">
-							<img src="device.png" width="600" alt="Remote debugging">
-						</a>
-						<p>
-							Diagnose problems that only manifest themselves in the real thing
-						</p>
-					</section>
+					<h2>Remote debugging</h2>
+					<a class="image" href="device.png" target="_blank">
+						<img src="device.png" width="600" alt="Remote debugging">
+					</a>
+					<p>
+						Diagnose problems that only manifest themselves in the real thing
+					</p>
+				</section>
 
-					<section>
-						<h2>Extending your tools</h2>
-						<a class="image" href="gcli.png" target="_blank">
-							<img src="gcli.png" width="600" alt="Command line">
-						</a>
-						<p>
-							GCLI commands (<a href="https://developer.mozilla.org/en-US/docs/Tools/GCLI#Extending_the_Command_Line">docs</a>)
-						</p>
-						<pre><code data-trim contenteditable>
-	gcli.addCommand({
-	  name: 'countdivs',
-	  exec: function(args, context) {
-	    return context.environment.document.querySelectorAll('div').length;
-	  }
-	});					</code></pre>
-					</section>
+				<section>
+					<h2>Extending your tools</h2>
+					<a class="image" href="gcli.png" target="_blank">
+						<img src="gcli.png" width="600" alt="Command line">
+					</a>
+					<p>
+						GCLI commands (<a href="https://developer.mozilla.org/en-US/docs/Tools/GCLI#Extending_the_Command_Line">docs</a>)
+					</p>
+					<pre><code data-trim contenteditable>
+gcli.addCommand({
+  name: 'countdivs',
+  exec: function(args, context) {
+    return context.environment.document.querySelectorAll('div').length;
+  }
+});					</code></pre>
+				</section>
 
-					<section>
-						<h2>Extending your tools (cont.)</h2>
-						<a class="image" href="ember.png" target="_blank">
-							<img src="ember.png" alt="Ember Inspector">
-						</a>
-						<ul>
-							<li>Add-ons (<a href="https://github.com/victorporof/Restartless-Template" target="_blank">template, <a href="https://addons.mozilla.org/firefox/addon/ember-inspector/" target="_blank">Ember</a>)</li>
-							<li>Browser debugging</li>
-						</ul>
+				<section>
+					<h2>Extending your tools (cont.)</h2>
+					<a class="image" href="ember.png" target="_blank">
+						<img src="ember.png" alt="Ember Inspector">
+					</a>
+					<ul>
+						<li>Add-ons (<a href="https://github.com/victorporof/Restartless-Template" target="_blank">template, <a href="https://addons.mozilla.org/firefox/addon/ember-inspector/" target="_blank">Ember</a>)</li>
+						<li>Browser debugging</li>
+					</ul>
 
-						<aside class="notes">
-							This is rarely possible with other platforms.
-						</aside>
-					</section>
-
+					<aside class="notes">
+						This is rarely possible with other platforms.
+					</aside>
 				</section>
 
 				<section>
