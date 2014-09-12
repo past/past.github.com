@@ -1,39 +1,41 @@
-gState = {
-  iteration: 0,
-  time: 0,
-  timeString: null
-}
+(function() {
+  window.addEventListener("load", function(event) {
+    var breakpointBtn = document.querySelector("#breakpoint-btn");
+    breakpointBtn.addEventListener("click", function onClick(event) {
+      loop(100);
+    }, false);
+  }, false);
 
-function loop(num) {
-  for(var i = 0; i < num; i++) {
-    console.log("Iteration: " + i);
-
-    gState.iteration = i;
-    gState.time = Date.now();
-    gState.timeString = new Date(gState.time).toUTCString();
-
-    try {
-      thrower();
-    } catch (e) {
-      console.log(e);
-    }
+  gState = {
+    iteration: 0,
+    time: 0,
+    timeString: null
   }
 
-  buggy();
-  console.log("Reached " + i);
-}
+  function loop(num) {
+    for(var i = 0; i < num; i++) {
+      console.log("Iteration: " + i);
 
-function thrower() {
-  throw new Error("Oops!");
-}
+      gState.iteration = i;
+      gState.time = Date.now();
+      gState.timeString = new Date(gState.time).toUTCString();
 
-function buggy() {
-  boom();
-}
+      try {
+        thrower();
+      } catch (e) {
+        console.log(e);
+      }
+    }
 
-window.addEventListener("load", function(event) {
-  var breakpointBtn = document.querySelector("#breakpoint-btn");
-  breakpointBtn.addEventListener("click", function onClick(event) {
-    loop(100);
-  }, false);
-}, false);
+    buggy();
+    console.log("Reached " + i);
+  }
+
+  function thrower() {
+    throw new Error("Oops!");
+  }
+
+  function buggy() {
+    boom();
+  }
+})();

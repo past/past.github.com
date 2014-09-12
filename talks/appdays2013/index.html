@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Debugging Firefox OS apps</title>
+
+		<meta name="description" content="A talk about debugging web apps for Firefox OS.">
+		<meta name="author" content="Panos Astithas">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="css/webgl.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<script type="text/javascript" src="js/profiling.js"></script>
+		<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="js/frameworks.js"></script>
+		<script type="text/javascript" src="js/shader.js"></script>
+
+    <script type="text/javascript" src="js/sylvester.js"></script>
+    <script type="text/javascript" src="js/glUtils.js"></script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+    <!-- Fragment shader program -->
+
+    <script id="shader-fs" type="x-shader/x-fragment">
+      varying highp vec2 vTextureCoord;
+      varying highp vec3 vLighting;
+      
+      uniform sampler2D uSampler;
+      
+      void main(void) {
+        highp vec4 texelColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+        
+        gl_FragColor = vec4(texelColor.rgb * vLighting, texelColor.a);
+      }
+    </script>
+    
+    <!-- Vertex shader program -->
+    
+    <script id="shader-vs" type="x-shader/x-vertex">
+      attribute highp vec3 aVertexNormal;
+      attribute highp vec3 aVertexPosition;
+      attribute highp vec2 aTextureCoord;
+    
+      uniform highp mat4 uNormalMatrix;
+      uniform highp mat4 uMVMatrix;
+      uniform highp mat4 uPMatrix;
+      
+      varying highp vec2 vTextureCoord;
+      varying highp vec3 vLighting;
+    
+      void main(void) {
+        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+        vTextureCoord = aTextureCoord;
+        
+        // Apply lighting effect
+        
+        highp vec3 ambientLight = vec3(0.6, 0.6, 0.6);
+        highp vec3 directionalLightColor = vec3(0.5, 0.5, 0.75);
+        highp vec3 directionalVector = vec3(0.85, 0.8, 0.75);
+        
+        highp vec4 transformedNormal = uNormalMatrix * vec4(aVertexNormal, 1.0);
+        
+        highp float directional = max(dot(transformedNormal.xyz, directionalVector), 0.0);
+        vLighting = ambientLight + (directionalLightColor * directional);
+      }
+    </script>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Firefox Developer tools</h1>
+					<p>
+						<small><a href="http://astithas.com">Panos Astithas</a> / <a href="http://twitter.com/pastith">@pastith</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>About me</h2>
+					<a class="image" href="fx-toronto.jpg" target="_blank">
+						<img src="fx-toronto.jpg" alt="Firefox team photo">
+					</a>
+					<ul>
+						<li class="fragment">Member of the Firefox Developer Tools team</li>
+						<li class="fragment">Mainly working on the JS debugger and perf tools</li>
+						<li class="fragment">Got the <a href="http://blog.astithas.com/2012/10/debugging-firefox-os.html" target="_blank">first</a> working Firefox OS remote debugging session</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Developer Tools</h2>
+					<ul>
+						<li class="fragment">For Web Apps</li>
+						<li class="fragment">For Mobile Apps</li>
+					</ul>
+				</section>
+
+				<section>
+					<h1>Web apps</h1>
+				</section>
+
+				<section>
+					<h2>HTML &amp; CSS debugging</h2>
+					<a class="image" href="inspector.png" target="_blank">
+						<img src="inspector.png" width="400" alt="Page Inspector">
+					</a>
+				</section>
+
+				<section>
+					<h2>JavaScript Debugging</h2>
+					<a class="image" href="debugger.png" target="_blank">
+						<img src="debugger.png" alt="JavaScript Debugger">
+					</a>
+					<ul>
+						<li class="fragment">Demo <button id="framework-btn">&#x25b6;</button></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Profiling</h2>
+					<a class="image" href="profiler.png" target="_blank">
+						<img src="profiler.png" width="600" alt="Profiler">
+					</a>
+						<li class="fragment">Demo <button id="profiling-btn">&#x25b6;</button></li>
+				</section>
+
+				<section>
+					<h2>Networking</h2>
+					<a class="image" href="network-monitor.png" target="_blank">
+						<img src="network-monitor.png" alt="Network Monitor">
+					</a>
+				</section>
+
+				<section>
+					<h2>Paintflashing</h2>
+					<a class="image" href="paint-flashing-activated.png" target="_blank">
+						<img src="paint-flashing-activated.png" width="500" alt="Paint flashing">
+					</a>
+				</section>
+
+				<section>
+					<h2>Reflow events</h2>
+					<a class="image" href="reflow.png" target="_blank">
+						<img src="reflow.png" alt="Reflow logging">
+					</a>
+				</section>
+
+				<section>
+					<h2>Debugging WebGL</h2>
+			    <canvas id="glcanvas" width="640" height="480">
+			      Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.
+			    </canvas>
+			    <video id="video">
+			      Your browser doesn't appear to support the HTML5 <code>&lt;video&gt;</code> element.
+			    </video>
+			    <p>Demo <button id="shader-btn">&#x25b6;</button></p>
+				</section>
+
+				<section>
+					<h1>Mobile Apps</h1>
+				</section>
+
+				<section>
+					<h2>Responsive Design</h2>
+					<a class="image" href="responsive-mode.png" target="_blank">
+						<img src="responsive-mode.png" width="600" alt="Responsive Design Mode">
+					</a>
+					<p>
+						Test layout behavior in different screen sizes
+					</p>
+				</section>
+
+				<section>
+					<h2>Simulators</h2>
+					<a class="image" href="simulator.png" target="_blank">
+						<img src="simulator.png" width="150" alt="Firefox OS Simulator">
+					</a>
+					<p>
+						Debug issues related to APIs unavailable on desktop
+					</p>
+				</section>
+
+				<section>
+					<h2>Remote debugging</h2>
+					<a class="image" href="device.png" target="_blank">
+						<img src="device.png" width="600" alt="Remote debugging">
+					</a>
+					<p>
+						Diagnose problems that only manifest themselves in the real thing
+					</p>
+				</section>
+
+				<section>
+					<h2>Thank You</h2>
+					<ul>
+						<li>Feedback:</li>
+						<ul>
+							<li><a href="https://twitter.com/pastith" target="_blank">@pastith</a></li>
+							<li><a href="https://twitter.com/firefoxdevtools" target="_blank">@FirefoxDevTools</a></li>
+						</ul>
+						<li>Homework:</li>
+						<ul>
+							<li>Slides: <a href="http://astithas.com/talks/appdays2013/" target="_blank">astithas.com/talks/appdays2013/</a></li>
+							<li>Firefox Developer Tools: <a href="https://developer.mozilla.org/docs/Tools" target="_blank">developer.mozilla.org/docs/Tools</a></li>
+							<li><a href="https://wiki.mozilla.org/DevTools/GetInvolved" target="_blank">Get involved!</li>
+						</ul>
+					</ul>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
