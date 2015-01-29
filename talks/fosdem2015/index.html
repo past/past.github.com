@@ -122,14 +122,70 @@
 				</section>
 
 				<section>
-					<h2>Actors studio</h2>
-					<ul>
-						<li class="fragment"></li>
-						<li class="fragment"></li>
-						<li class="fragment"></li>
-						<li class="fragment"></li>
-						<li class="fragment"></li>
-					</ul>
+					<h2>Firefox actor</h2>
+						<pre><code data-trim contenteditable>
+  onEvaluateJS: function (aRequest)
+  {
+    let input = aRequest.text;
+    let timestamp = Date.now();
+
+    let evalOptions = { ... };
+
+    let evalInfo = this.evalWithDebugger(input, evalOptions);
+    let evalResult = ...;
+    let helperResult = ...;
+
+    let result, errorMessage, errorGrip = null;
+    if (evalResult) {
+      if ("return" in evalResult) {
+        result = evalResult.return;
+      }
+      else if ("yield" in evalResult) {
+        result = evalResult.yield;
+      }
+      else if ("throw" in evalResult) {
+        let error = evalResult.throw;
+        errorGrip = this.createValueGrip(error);
+        let errorToString = evalInfo.window.evalInGlobalWithBindings(...);
+        if (errorToString && typeof errorToString.return == "string") {
+          errorMessage = ...;
+        }
+      }
+    }
+
+    return { ... };
+  },
+						</code></pre>
+				</section>
+
+				<section>
+					<h2>Chrome/Safari actor</h2>
+						<pre><code data-trim contenteditable>
+  evaluateJS: asyncMethod(function*(expression) {
+    let response = yield this.rpc.request("Runtime.evaluate", {
+      expression: expression,
+      includeCommandLineAPI: true,
+    });
+
+    yield preview.loadPreview(this.rpc, response.result);
+
+    let result, exception = null, exceptionMessage;
+    if (response.wasThrown) {
+      result = { type: "undefined" };
+      exceptionMessage = response.result.description;
+      exception = response.result;
+      if (response.exceptionDetails) {
+        exception.preview.fileName = ...;
+        exception.preview.lineNumber = ...;
+        exception.preview.columnNumber = ...;
+      }
+    } else {
+      result = response.result;
+    }
+
+    return { ... }
+  }),
+						</code></pre>
 				</section>
 
 				<section>
