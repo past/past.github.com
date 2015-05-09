@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><link rel="stylesheet" href="animation_files/styles.css"><script src="animation_files/script.js"></script><title>DevTools Demos - Animation Timing Functions</title></head><body class="header"><header><a href="https://bgrins.github.io/devtools-demos/index.html">DevTools Demos</a><a href="https://github.com/bgrins/devtools-demos" class="repo-link">repository</a></header>
+
+  <style type="text/css">
+
+  .container {
+    width: 80%; margin: 0 auto;
+  }
+  .box {
+    width: 50px;
+    height: 50px;
+    margin: 10px 0;
+    position:relative;
+    border-radius: 50%;
+    transform: translate3d(0, 0, 0);
+    -webkit-animation: slideshow 3s infinite;
+    animation:    slideshow 3s infinite;
+  }
+
+  #box1 {
+    animation-delay: 4s;
+    animation-timing-function: ease;
+    -webkit-animation-timing-function: ease;
+  }
+  #box2 {
+    animation-delay: 400ms;
+    animation-timing-function: ease-in;
+    -webkit-animation-timing-function: ease-in;
+  }
+  #box3 {
+    animation-timing-function: ease-out;
+    -webkit-animation-timing-function: ease-out;
+  }
+  #box4 {
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
+  }
+  #box5 {
+    animation-timing-function: linear;
+    -webkit-animation-timing-function: linear;
+  }
+  #box6 {
+    animation-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1);
+    -webkit-animation-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1);
+  }
+  #box7 {
+    animation-timing-function: step-start;
+    -webkit-animation-timing-function: step-start;
+  }
+  #box8 {
+    animation-timing-function: step-end;
+    -webkit-animation-timing-function: step-end;
+  }
+  #box9 {
+    animation-timing-function: steps(4, end);
+    -webkit-animation-timing-function: steps(4, end);
+  }
+  #box10 {
+    animation-timing-function: ease, step-start, cubic-bezier(0.1, 0.7, 1.0, 0.1);
+    -webkit-animation-timing-function: ease, step-start, cubic-bezier(0.1, 0.7, 1.0, 0.1);
+  }
+
+
+  @-webkit-keyframes slideshow {
+    0%    {  background: blue;}
+    80%  {  transform: translateX(500px);  background: orange;}
+    100%  {  transform: translateX(500px);  background: orange;}
+  }
+  @keyframes slideshow {
+    0%    {  background: blue;}
+    80%  {  transform: translateX(500px);  background: orange; }
+    100%  {  transform: translateX(500px);  background: orange; }
+  }
+
+  </style>
+
+  <h1>Animation Timing Functions</h1>
+
+  <div class="container">
+    <div class="box" id="box1"></div>
+    <div class="box" id="box2"></div>
+    <div class="box" id="box3"></div>
+    <div class="box" id="box4"></div>
+    <div class="box" id="box5"></div>
+    <div class="box" id="box6"></div>
+    <div class="box" id="box7"></div>
+    <div class="box" id="box8"></div>
+    <div class="box" id="box9"></div>
+    <div class="box" id="box10"></div>
+  </div>
+
+</body></html>
