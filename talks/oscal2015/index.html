@@ -17,10 +17,15 @@
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/webgl.css" type="text/css">
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <script type="text/javascript" src="js/shader.js"></script>
+    <script type="text/javascript" src="js/sylvester.js"></script>
+    <script type="text/javascript" src="js/glUtils.js"></script>
 
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
@@ -31,6 +36,51 @@
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
 
+    <!-- Fragment shader program -->
+
+    <script id="shader-fs" type="x-shader/x-fragment">
+      varying highp vec2 vTextureCoord;
+      varying highp vec3 vLighting;
+      
+      uniform sampler2D uSampler;
+      
+      void main(void) {
+        highp vec4 texelColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+        
+        gl_FragColor = vec4(texelColor.rgb * vLighting, texelColor.a);
+      }
+    </script>
+    
+    <!-- Vertex shader program -->
+    
+    <script id="shader-vs" type="x-shader/x-vertex">
+      attribute highp vec3 aVertexNormal;
+      attribute highp vec3 aVertexPosition;
+      attribute highp vec2 aTextureCoord;
+    
+      uniform highp mat4 uNormalMatrix;
+      uniform highp mat4 uMVMatrix;
+      uniform highp mat4 uPMatrix;
+      
+      varying highp vec2 vTextureCoord;
+      varying highp vec3 vLighting;
+    
+      void main(void) {
+        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+        vTextureCoord = aTextureCoord;
+        
+        // Apply lighting effect
+        
+        highp vec3 ambientLight = vec3(0.6, 0.6, 0.6);
+        highp vec3 directionalLightColor = vec3(0.5, 0.5, 0.75);
+        highp vec3 directionalVector = vec3(0.85, 0.8, 0.75);
+        
+        highp vec4 transformedNormal = uNormalMatrix * vec4(aVertexNormal, 1.0);
+        
+        highp float directional = max(dot(transformedNormal.xyz, directionalVector), 0.0);
+        vLighting = ambientLight + (directionalLightColor * directional);
+      }
+    </script>
 	</head>
 
 	<body>
@@ -160,6 +210,16 @@
         </section>
 
         <section>
+          <h2>Responsive Design</h2>
+          <a class="image" href="responsive-mode.png" target="_blank">
+            <img src="responsive-mode.png" width="600" alt="Responsive Design Mode">
+          </a>
+          <p>
+            Test layout behavior in different screen sizes
+          </p>
+        </section>
+
+        <section>
           <h2>Valence and WebIDE</h2>
         </section>
 
@@ -233,6 +293,18 @@
           <a class="image" href="jit-coach.gif" target="_blank">
             <img src="jit-coach.gif" alt="JIT coach">
           </a>
+        </section>
+
+        <section>
+          <h2>Debugging WebGL</h2>
+          <canvas id="glcanvas" width="640" height="480">
+            Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.
+          </canvas>
+          <video id="video">
+            Your browser doesn't appear to support the HTML5 <code>&lt;video&gt;</code> element.
+          </video>
+          <p>WebGL <a href="https://developer.mozilla.org/docs/Web/WebGL/Animating_textures_in_WebGL" target="_blank">demo</a> <button id="shader-btn">&#x25b6;</button></p>
+          <p>More <a target="_blank" href="https://hacks.mozilla.org/2013/11/live-editing-webgl-shaders-with-firefox-developer-tools/">demos</a> and <a href="https://developer.mozilla.org/docs/Tools/Shader_Editor" target="_blank">docs</a></p>
         </section>
 
 				<section>
