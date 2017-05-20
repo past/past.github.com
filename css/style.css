@@ -110,6 +110,10 @@ color:blue;
     border: 0;
 }
 
+.lanyrd-target-splat {
+	padding-inline-start: 40px;
+}
+
 /*
  * print styles
  */
