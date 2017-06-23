@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Photon Performance Dashboard</title>
+  <meta name='viewport' content='width=device-width'>
+
+  <link rel='stylesheet prefetch' href='https://telemetry.mozilla.org/new-pipeline/style/metricsgraphics.css'>
+  <link rel='stylesheet prefetch' href='https://telemetry.mozilla.org/wrapper/telemetry-wrapper.css'>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'></script>
+  <script src='https://telemetry.mozilla.org/new-pipeline/lib/metricsgraphics.js'></script>
+  <script src='https://telemetry.mozilla.org/new-pipeline/lib/d3pie.min.js'></script>
+  <script src='https://telemetry.mozilla.org/v2/telemetry.js'></script>
+  <script src='https://telemetry.mozilla.org/wrapper/telemetry-wrapper.js'></script>
+  <script src="js/index.js"></script>
+
+  <h1 id="title">Photon Performance Dashboard</h1>
+  <section id="winOpenSection">
+    <p>Window opening &lt; 300ms</p>
+    <div id="winOpen"></div>
+  </section>
+  <section id="tabSwitchSection">
+    <p>Tab switching &lt; 130ms</p>
+    <div id="tabSwitch"></div>
+  </section>
+  <section id="tabCloseSection">
+    <p>Window closing &lt; 100ms</p>
+    <div id="tabClose"></div>
+  </section>
+
+</body>
+</html>
