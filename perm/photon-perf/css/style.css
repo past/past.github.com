@@ -1,8 +1,26 @@
+body {
+  font-family: Fira Sans,Open Sans,sans-serif;
+  margin: 0;
+  padding: 0;
+  /*background-color: #e9fcc6;*/
+}
 h1 {
-
+  text-align: center;
+  color: white;
+  background-color: black;
+}
+section {
+  margin: 20px;
+  background-color: white;
 }
 section > p {
-
+  text-align: center;
+  color: white;
+  background-color: gray;
+}
+#dashboards {
+  display: flex;
+  flex-flow: row wrap;
 }
 .graph-container {
   width: 45vw;

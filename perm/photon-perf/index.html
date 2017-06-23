@@ -8,6 +8,7 @@
   <link rel='stylesheet prefetch' href='https://telemetry.mozilla.org/new-pipeline/style/metricsgraphics.css'>
   <link rel='stylesheet prefetch' href='https://telemetry.mozilla.org/wrapper/telemetry-wrapper.css'>
 
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,400i,500">
   <link rel="stylesheet" href="css/style.css">
 
   
@@ -23,18 +24,19 @@
   <script src="js/index.js"></script>
 
   <h1 id="title">Photon Performance Dashboard</h1>
-  <section id="winOpenSection">
-    <p>Window opening &lt; 300ms</p>
-    <div id="winOpen"></div>
-  </section>
-  <section id="tabSwitchSection">
-    <p>Tab switching &lt; 130ms</p>
-    <div id="tabSwitch"></div>
-  </section>
-  <section id="tabCloseSection">
-    <p>Window closing &lt; 100ms</p>
-    <div id="tabClose"></div>
-  </section>
-
+  <div id="dashboards">
+    <section id="winOpenSection">
+      <p>Window opening &lt; 300ms</p>
+      <div id="winOpen"></div>
+    </section>
+    <section id="tabSwitchSection">
+      <p>Tab switching &lt; 130ms</p>
+      <div id="tabSwitch"></div>
+    </section>
+    <section id="tabCloseSection">
+      <p>Window closing &lt; 100ms</p>
+      <div id="tabClose"></div>
+    </section>
+  </div>
 </body>
 </html>
