@@ -21,9 +21,11 @@ section > p {
 #dashboards {
   display: flex;
   flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
 }
 .graph-container {
-  width: 45vw;
+  /*width: 45vw;*/
 }
 .graph-title {
   text-decoration: underline;
