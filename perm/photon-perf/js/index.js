@@ -40,10 +40,24 @@ var plots = [
     "filters": {
       "application": "Firefox"
     }
+  },
+  {
+    "channel": "nightly",
+    "version": "",
+    "metric": "SIMPLE_MEASURES_FIRSTPAINT",
+    "useSubmissionDate": false,
+    "sanitize": true,
+    "trim": true,
+    "compare": "",
+    "sensibleCompare": true,
+    "evoVersions": "3",
+    "filters": {
+      "application": "Firefox"
+    }
   }
 ];
 
-var nodes = ["winOpen", "tabSwitch", "tabClose"];
+var nodes = ["winOpen", "tabSwitch", "tabClose", "startup"];
 
 window.addEventListener('load', () => {
   let i = 0;
