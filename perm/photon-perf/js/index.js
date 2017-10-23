@@ -52,6 +52,7 @@ var plots = [
     "sensibleCompare": true,
     "evoVersions": "3",
     "filters": {
+      "child": "parent",
       "application": "Firefox"
     }
   }
