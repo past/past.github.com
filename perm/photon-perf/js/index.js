@@ -55,10 +55,25 @@ var plots = [
       "child": "parent",
       "application": "Firefox"
     }
+  },
+  {
+    "channel": "nightly",
+    "version": "",
+    "metric": "SIMPLE_MEASURES_BLANKWINDOWSHOWN",
+    "useSubmissionDate": false,
+    "sanitize": true,
+    "trim": true,
+    "compare": "",
+    "sensibleCompare": true,
+    "evoVersions": "3",
+    "filters": {
+      "child": "parent",
+      "application": "Firefox"
+    }
   }
 ];
 
-var nodes = ["winOpen", "tabSwitch", "tabClose", "startup"];
+var nodes = ["winOpen", "tabSwitch", "tabClose", "startup", "blankStartup"];
 
 window.addEventListener('load', () => {
   let i = 0;
